@@ -19,11 +19,13 @@ jobs:
           node-version: 22.x
           cache: npm
       - run: npm ci
-      - uses: actions/cache/restore@v4
+     - uses: actions/cache/restore@v4
         with:
           path: |
             node_modules/.astro/assets
-          key: static
+          key: static-${{ github.run_id }}
+          restore-keys: |
+            static-
       - run: npm run build
         name: Build
         env:
@@ -80,4 +82,4 @@ jobs:
         with:
           path: |
             node_modules/.astro/assets
-          key: static
+          key: static-${{ github.run_id }}
